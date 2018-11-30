@@ -31,10 +31,10 @@ public function up()
 }
 ```
 
-And, Extends `Xzxzyzyz\Laravel\UUid\Model` in your model.
+And, Extends `Xzxzyzyz\Laravel\Uuid\Model` in your model.
 
 ```php
-use Xzxzyzyz\Laravel\UUid\Model;
+use Xzxzyzyz\Laravel\Uuid\Model;
 
 class Example extends Model
 {
