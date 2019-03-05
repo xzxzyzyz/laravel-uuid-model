@@ -25,7 +25,7 @@ Create primary key as string type.
 public function up()
 {
 	Schema::create('example', function(Blueprint $table) {
-		$table->string('id')->primary();
+		$table->uuid('id')->primary();
 		// ...
 	});
 }
