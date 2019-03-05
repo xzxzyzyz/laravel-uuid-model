@@ -2,9 +2,7 @@
 
 namespace Xzxzyzyz\Laravel\Uuid;
 
-use Illuminate\Database\Eloquent\Model as BaseModel;
-
-class Model extends BaseModel
+class Model extends \Illuminate\Database\Eloquent\Model
 {
     use Behaviors\Assign;
 
