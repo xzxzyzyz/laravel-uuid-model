@@ -1,6 +1,6 @@
 # Laravel Uuid Model
 
-[![CircleCI](https://circleci.com/gh/xzxzyzyz/laravel-uuid-model.svg?style=svg)](https://circleci.com/gh/xzxzyzyz/laravel-uuid-model)
+[![Build Status](https://travis-ci.com/xzxzyzyz/laravel-uuid-model.svg?branch=master)](https://travis-ci.com/xzxzyzyz/laravel-uuid-model)
 [![Latest Stable Version](https://poser.pugx.org/xzxzyzyz/laravel-uuid-model/version)](https://packagist.org/packages/xzxzyzyz/laravel-uuid-model)
 [![License](https://poser.pugx.org/xzxzyzyz/laravel-uuid-model/license)](https://packagist.org/packages/xzxzyzyz/laravel-uuid-model)
 
