@@ -12,8 +12,8 @@ trait Assign
     public static function bootAssign()
     {
         static::creating(function (Model $model) {
-            if (blank($model->id)) {
-                $model->id = (string) \Illuminate\Support\Str::orderedUuid();
+            if (blank($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = (string) \Illuminate\Support\Str::orderedUuid();
             }
         });
     }
