@@ -15,7 +15,11 @@ class ModelTest extends TestCase
         $this->assertArrayHasKey('id', $model);
 
         // example: 8b5dd34b-624b-4c9c-b432-217c1fa94607
-        $this->assertMatchesRegularExpression('/^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/', $model->id);
+        if (method_exists($this, 'assertMatchesRegularExpression')) {
+            $this->assertMatchesRegularExpression('/^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/', $model->id);
+        } else {
+            $this->assertRegExp('/^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/', $model->id);
+        }
     }
 }
 
