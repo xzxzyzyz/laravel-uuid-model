@@ -11,18 +11,26 @@ jobs:
     strategy:
       matrix:
         php: [8.1, 8.2, 8.3]
-        laravel: [^9.0, ^10.0, ^11.0]
+        laravel: [^9.0, ^10.0, ^11.0, ^12.0]
         dependency-version: [stable, lowest]
         include:
+          - laravel: ^12.0
+            testbench: ^10.0
           - laravel: ^11.0
             testbench: ^9.0
           - laravel: ^10.0
             testbench: ^8.0
           - laravel: ^9.0
             testbench: ^7.0
+          - dependency-version: stable
+            minimum-stability: stable
+          - dependency-version: lowest
+            minimum-stability: dev
         exclude:
           - php: 8.1
             laravel: ^11.0
+          - php: 8.1
+            laravel: ^12.0
           - php: 8.2
             laravel: ^9.0
           - php: 8.3
@@ -32,7 +40,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -43,10 +51,10 @@ jobs:
 
       - name: Register composer cache directory
         id: composer-cache-files-dir
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             vendor
@@ -61,12 +69,12 @@ jobs:
       - name: Install dependencies
         env:
           COMPOSER_DISCARD_CHANGES: true
-        run: composer require --no-suggest --no-progress --no-interaction --prefer-dist --update-with-all-dependencies "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}"
+        run: composer require --no-progress --no-interaction --prefer-dist --update-with-all-dependencies "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}"
 
       - name: Set dependency version
         env:
           COMPOSER_DISCARD_CHANGES: true
-        run: composer update --no-suggest --no-progress --no-interaction --no-suggest --prefer-dist --with-all-dependencies --prefer-${{ matrix.dependency-version }}
+        run: composer update --no-progress --no-interaction --prefer-dist --with-all-dependencies --prefer-${{ matrix.dependency-version }}
 
       - name: Execute tests
         run: vendor/bin/phpunit
